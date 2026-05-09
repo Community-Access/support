@@ -56,6 +56,14 @@ This repository does not host workshop curriculum source files.
 - Active-cohort triage: daily
 - Off-cycle triage: three times per week
 
+## Automation
+
+This repository includes support automation:
+
+- First-response assistant on new issues
+- Stale queue management
+- Weekly support digest every Monday (discussion post with issue fallback)
+
 ## Community Rules
 
 - Be respectful and constructive.

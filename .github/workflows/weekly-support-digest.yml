@@ -1,0 +1,149 @@
+name: Weekly Support Digest
+
+on:
+  schedule:
+    - cron: "0 16 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  discussions: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build weekly support digest
+        id: digest
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const now = new Date();
+            const weekAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+            const sinceIso = weekAgo.toISOString();
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'all',
+              per_page: 100,
+              since: sinceIso,
+            });
+
+            const supportIssues = issues.filter(i => !i.pull_request);
+            const openedLast7 = supportIssues.filter(i => new Date(i.created_at) >= weekAgo).length;
+            const closedLast7 = supportIssues.filter(i => i.closed_at && new Date(i.closed_at) >= weekAgo).length;
+
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100,
+            });
+            const openSupport = openIssues.filter(i => !i.pull_request);
+            const openCount = openSupport.length;
+
+            const stale48h = openSupport.filter(i => {
+              const updated = new Date(i.updated_at).getTime();
+              return (now.getTime() - updated) >= (48 * 60 * 60 * 1000);
+            }).length;
+
+            const byLabel = (labelName) => openSupport.filter(i =>
+              (i.labels || []).some(l => (l.name || '').toLowerCase() === labelName.toLowerCase())
+            ).length;
+
+            const needsTriage = byLabel('needs-triage');
+            const escalated = byLabel('escalated');
+            const accessibility = byLabel('accessibility');
+            const setup = byLabel('setup');
+
+            const dateText = now.toISOString().slice(0, 10);
+            const title = `Weekly Support Digest - ${dateText}`;
+            const body = [
+              `# Weekly Support Digest (${dateText})`,
+              '',
+              '## Snapshot',
+              '',
+              `- Open support issues: **${openCount}**`,
+              `- New issues in last 7 days: **${openedLast7}**`,
+              `- Closed issues in last 7 days: **${closedLast7}**`,
+              `- Open issues inactive for 48+ hours: **${stale48h}**`,
+              '',
+              '## Queue by label',
+              '',
+              `- needs-triage: **${needsTriage}**`,
+              `- escalated: **${escalated}**`,
+              `- accessibility: **${accessibility}**`,
+              `- setup: **${setup}**`,
+              '',
+              '## Suggested actions',
+              '',
+              '1. Clear needs-triage queue first.',
+              '2. Prioritize escalated and accessibility issues.',
+              '3. Follow up on any issue idle for 48+ hours.',
+            ].join('\n');
+
+            core.setOutput('title', title);
+            core.setOutput('body', body);
+
+      - name: Post digest as discussion (preferred) or issue (fallback)
+        uses: actions/github-script@v7
+        env:
+          DIGEST_TITLE: ${{ steps.digest.outputs.title }}
+          DIGEST_BODY: ${{ steps.digest.outputs.body }}
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const title = process.env.DIGEST_TITLE;
+            const body = process.env.DIGEST_BODY;
+
+            const query = `
+              query($owner: String!, $repo: String!) {
+                repository(owner: $owner, name: $repo) {
+                  id
+                  discussionCategories(first: 20) {
+                    nodes { id name }
+                  }
+                }
+              }
+            `;
+
+            const data = await github.graphql(query, { owner, repo });
+            const categories = data.repository.discussionCategories.nodes || [];
+            const preferred = categories.find(c => ['Announcements', 'Q&A', 'General'].includes(c.name));
+
+            if (preferred) {
+              const mutation = `
+                mutation($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) {
+                  createDiscussion(input: {
+                    repositoryId: $repositoryId,
+                    categoryId: $categoryId,
+                    title: $title,
+                    body: $body
+                  }) {
+                    discussion { url }
+                  }
+                }
+              `;
+              const created = await github.graphql(mutation, {
+                repositoryId: data.repository.id,
+                categoryId: preferred.id,
+                title,
+                body,
+              });
+              core.notice(`Posted weekly digest discussion: ${created.createDiscussion.discussion.url}`);
+              return;
+            }
+
+            const issue = await github.rest.issues.create({
+              owner,
+              repo,
+              title,
+              body,
+              labels: ['needs-triage'],
+            });
+            core.notice(`No discussion category found. Posted digest as issue: ${issue.data.html_url}`);
