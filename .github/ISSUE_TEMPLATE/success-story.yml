@@ -1,0 +1,31 @@
+name: Success Story
+description: Share a win so others can learn from your journey
+title: "win: "
+labels:
+  - resolved
+body:
+  - type: input
+    id: headline
+    attributes:
+      label: What did you accomplish
+      placeholder: Merged my first PR after the workshop
+    validations:
+      required: true
+
+  - type: textarea
+    id: path
+    attributes:
+      label: What helped most
+      description: Share the step, tip, or resource that unlocked progress
+      placeholder: The turning point was...
+    validations:
+      required: true
+
+  - type: textarea
+    id: advice
+    attributes:
+      label: Advice for the next learner
+      description: One practical tip for someone starting today
+      placeholder: Start by...
+    validations:
+      required: false

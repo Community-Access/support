@@ -1,0 +1,27 @@
+name: Stale Support Cleanup
+
+on:
+  schedule:
+    - cron: "0 14 * * 1,4"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-issue-message: |
+            This support issue has had no activity for 21 days.
+            If you still need help, reply here and we will continue from where you left off.
+          close-issue-message: |
+            Closing due to inactivity.
+            If you still need support, open a new issue and link this one.
+          stale-issue-label: needs-triage
+          exempt-issue-labels: escalated,resolved
+          days-before-issue-stale: 21
+          days-before-issue-close: 14

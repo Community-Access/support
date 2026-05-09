@@ -1,0 +1,50 @@
+name: Accessibility Support
+description: Get help with screen reader, keyboard, and accessible workflow blockers
+title: "a11y: "
+labels:
+  - needs-triage
+  - accessibility
+body:
+  - type: input
+    id: context
+    attributes:
+      label: Where are you blocked
+      description: Page, task, or step where the issue happens
+      placeholder: Opening PR review comments in Files changed view
+    validations:
+      required: true
+
+  - type: dropdown
+    id: assistive-tech
+    attributes:
+      label: Assistive technology
+      options:
+        - NVDA
+        - JAWS
+        - VoiceOver (macOS)
+        - VoiceOver (iOS)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: What does your assistive tech announce, and what did you expect?
+      placeholder: NVDA announces..., expected focus to move to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: Numbered steps another maintainer can follow
+      placeholder: |
+        1. Opened PR...
+        2. Navigated to...
+        3. Pressed...
+        4. Heard...
+    validations:
+      required: true

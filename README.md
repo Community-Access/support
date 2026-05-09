@@ -2,6 +2,14 @@
 
 Open support hub for GIT Going with GitHub learners and alumni.
 
+## Start Here
+
+Choose the support path that fits your need:
+
+- Need help solving a blocker: open an issue using one of the support forms.
+- Want advice or discussion: use Discussions for Q&A and community collaboration.
+- Want to celebrate progress: post wins in Discussions so others can learn from your path.
+
 ## Purpose
 
 Use this repository for:
@@ -25,6 +33,23 @@ This repository does not host workshop curriculum source files.
 2. Use Discussions for Q&A and community conversation.
 3. Include clear reproduction steps and expected behavior.
 
+## Support Channels
+
+- Issues: https://github.com/Community-Access/git-going-open-support/issues
+- Discussions: https://github.com/Community-Access/git-going-open-support/discussions
+
+## Support Labels
+
+- `needs-triage`: New issue awaiting first maintainer response
+- `setup`: Installation and environment setup issues
+- `classroom`: GitHub Classroom or assignment flow issues
+- `accessibility`: Screen reader or keyboard accessibility support
+- `copilot`: Copilot or AI-assist questions
+- `good-first-answer`: Great entry issue for community responders
+- `office-hours`: Candidate topics for live office hours
+- `resolved`: Confirmed solved
+- `escalated`: Needs maintainer escalation
+
 ## Response Targets
 
 - First response: 24 to 48 hours
@@ -36,3 +61,7 @@ This repository does not host workshop curriculum source files.
 - Be respectful and constructive.
 - Do not post personal data, private links, or secrets.
 - If a question involves private student information, ask maintainers for private follow-up.
+
+## Maintainer Operations
+
+Maintainers should follow the triage process documented in SUPPORT_PLAYBOOK.md.
