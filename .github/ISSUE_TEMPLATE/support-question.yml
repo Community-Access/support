@@ -1,0 +1,54 @@
+name: Support Question
+description: Ask for post-workshop help or troubleshooting
+title: "support: "
+labels:
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please include enough detail so maintainers can help quickly.
+
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      description: Short summary of your question
+      placeholder: Unable to run Challenge 10 local workflow
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: What happened
+      description: Describe what you expected and what happened instead
+      placeholder: I expected..., but I got...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Steps someone else can follow to reproduce
+      placeholder: |
+        1. Opened...
+        2. Ran...
+        3. Saw...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: assistive-tech
+    attributes:
+      label: Assistive technology used
+      options:
+        - NVDA
+        - JAWS
+        - VoiceOver (macOS)
+        - VoiceOver (iOS)
+        - None
+        - Other
+    validations:
+      required: false

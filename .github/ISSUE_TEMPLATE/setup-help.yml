@@ -1,0 +1,33 @@
+name: Setup Help
+description: Get help with environment setup before or after workshop
+title: "setup: "
+labels:
+  - needs-triage
+  - setup
+body:
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      description: Operating system and major tooling
+      placeholder: Windows 11, NVDA, VS Code
+    validations:
+      required: true
+
+  - type: textarea
+    id: blocker
+    attributes:
+      label: Current blocker
+      description: What is stopping progress right now
+      placeholder: Unable to sign in from VS Code GitHub extension
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you already tried
+      description: Include links to docs or steps attempted
+      placeholder: Followed docs/00-pre-workshop-setup and restarted VS Code
+    validations:
+      required: false
