@@ -1,4 +1,4 @@
-# Git Going Open Support
+# Community Access Support Hub
 
 Open support hub for GIT Going with GitHub learners and alumni.
 
@@ -35,8 +35,8 @@ This repository does not host workshop curriculum source files.
 
 ## Support Channels
 
-- Issues: https://github.com/Community-Access/git-going-open-support/issues
-- Discussions: https://github.com/Community-Access/git-going-open-support/discussions
+- Issues: https://github.com/Community-Access/support/issues
+- Discussions: https://github.com/Community-Access/support/discussions
 
 ## Support Labels
 
