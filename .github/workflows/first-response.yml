@@ -14,17 +14,9 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |
-            const issueNumber = context.issue.number;
-            const author = context.payload.issue.user.login;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issueNumber,
-              body: `Thanks for opening this, @${author}.\n\nA maintainer will review this request within 24 to 48 hours.\n\nTo speed triage, you can add:\n- exact reproduction steps\n- your expected behavior\n- your assistive technology and platform` 
-            });
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issueNumber,
-              labels: ["needs-triage"]
+              issue_number: context.issue.number,
+              body: Thanks for opening this request. A maintainer will review it within 24 to 48 hours.
             });
