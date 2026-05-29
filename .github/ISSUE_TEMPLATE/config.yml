@@ -3,3 +3,6 @@ contact_links:
   - name: Support Hub Discussions (Q&A)
     url: https://github.com/Community-Access/support/discussions
     about: Use Discussions for async mentoring and community Q&A.
+  - name: Product Feedback Form Guidance
+    url: https://github.com/Community-Access/support/issues/new?template=product-feedback.yml
+    about: Use the Product Feedback form for app issues, usability problems, and feature ideas routed from Community Access tools.

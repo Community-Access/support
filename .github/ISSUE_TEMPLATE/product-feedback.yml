@@ -1,0 +1,90 @@
+name: Product Feedback
+description: Report a bug, usability problem, or feature idea from a Community Access app
+title: "product-feedback: "
+labels:
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when a Community Access app sent you here or when you want to report a product issue without using the app's built-in feedback path.
+
+  - type: input
+    id: source-app
+    attributes:
+      label: Source application
+      description: Which app or surface are you using?
+      placeholder: Quill, GLOW, Learning Room, Git Going with GitHub
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feedback type
+      options:
+        - Bug report
+        - Usability issue
+        - Accessibility issue
+        - Feature request
+        - General feedback
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or build
+      description: App version, beta version, or deployment version if known
+      placeholder: 0.9.0-beta1 or 8.0.0
+    validations:
+      required: false
+
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      description: Operating system, browser, or assistive technology context
+      placeholder: Windows 11 with NVDA, Chrome on macOS, iPhone with VoiceOver
+    validations:
+      required: false
+
+  - type: input
+    id: summary
+    attributes:
+      label: Short summary
+      description: One sentence that tells maintainers what matters most
+      placeholder: GLOW fix preview opened, but compare started on the wrong tab
+    validations:
+      required: true
+
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: Describe what you saw, heard, or experienced
+      placeholder: I chose..., expected..., but instead...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Numbered steps someone else can follow
+      placeholder: |
+        1. Opened...
+        2. Chose...
+        3. Pressed...
+        4. Heard or saw...
+    validations:
+      required: false
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics or extra context
+      description: Include any non-sensitive diagnostics notes, issue links, or workflow context
+      placeholder: Support hub issue created automatically from app feedback, or attached diagnostics bundle reviewed locally first.
+    validations:
+      required: false

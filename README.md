@@ -2,6 +2,8 @@
 
 Open support hub for GIT Going with GitHub learners and alumni.
 
+This repository also serves as a shared support intake for Community Access apps and services that route feedback here automatically.
+
 ## Start Here
 
 Choose the support path that fits your need:
@@ -18,6 +20,7 @@ Use this repository for:
 - Setup and troubleshooting help
 - Accessibility workflow questions
 - Sharing wins and progress updates
+- Product feedback and bug reports routed from Community Access apps such as GLOW and Quill
 
 This repository does not host workshop curriculum source files.
 
@@ -37,6 +40,10 @@ This repository does not host workshop curriculum source files.
 
 - Issues: https://github.com/Community-Access/support/issues
 - Discussions: https://github.com/Community-Access/support/discussions
+
+## Connected App Intake
+
+Some Community Access apps can create issues here automatically through a server-side support-hub connector. Those issues should be treated like any other support request, with the source app, version, and workflow context included in the issue body.
 
 ## Support Labels
 

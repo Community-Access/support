@@ -22,6 +22,7 @@ Within 24 to 48 hours, every new issue should receive:
    - Support and troubleshooting: handle in this repo.
    - Curriculum change request: route to main workshop repo.
    - Template automation change request: route to learning-room-template.
+   - Product feedback from a connected app: keep the issue here unless the maintainer needs to open a linked engineering issue elsewhere.
 2. Add labels.
 3. Respond with a next action.
 4. Follow up until resolved or escalated.
@@ -38,6 +39,7 @@ Use `escalated` when:
 
 - Do not ask users to post secrets, tokens, or private links.
 - Move sensitive account details to private facilitator contact.
+- If an app-submitted issue includes diagnostics context, confirm that it does not contain sensitive document content before copying details elsewhere.
 
 ## Resolution Criteria
 
